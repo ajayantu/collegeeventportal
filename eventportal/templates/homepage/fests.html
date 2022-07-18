@@ -1,0 +1,31 @@
+{% extends "../BaseHtml/base.html" %}
+{% load static %}
+{% block title %}
+IEvent|Fests
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/fests.css">
+{% endblock head %}
+{% block body %}
+<div class="fests_container">
+    <a href="/addfest"><button class="add_fest_btn">Add fests</button></a>
+    <h1 class="card__header fest__header">UPCOMING FESTS</h1>
+    <br><hr><br><br><br><br>
+    <div class="grid">
+        {% for fest in fests %}
+        <div class="grid__item">
+            <div class="card">
+                <img class="card__img" src={{fest.fest_img}} alt={{ fest.fest_name }}>
+                <div class="card__content">
+                    <h3>&nbsp;21/10/2022</h3><br>
+                    <h1 class="card__header">{{ fest.fest_name }}</h1>
+                    <h3>&nbsp;{{ fest.fest_venue }}</h3><br>
+                    <p class="card__text">{{festdesc}}</p>
+                    <button class="card__btn">View Events</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}

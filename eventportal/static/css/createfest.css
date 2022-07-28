@@ -1,26 +1,29 @@
 body{
     background-color: #f5f5f5;
 }
-.contents{
-    font-size: 62.5%;
+.contents {
     justify-content: center;
     align-items: center;
     display: flex;
     font-family: "Inter", sans-serif;
+    height: 100vh;
   }
   @media (max-width: 60em) {
-   .contents{
-      padding: 3rem;
+    .contents {
+      padding: 2rem;
     }
   }
   
   input {
-      background-color: #DDDDDD;
+    background-color: #DDDDDD;
       border: none;
       padding: 12px 15px;
       margin: 8px 0;
-      width: 100%;
-      border-radius: 6px;
+    width: 100%;
+    border-radius: 6px;
+  }
+  input:focus,textarea:focus{
+    outline: 1.5px solid orange;
   }
   
   button {
@@ -47,15 +50,34 @@ body{
   }
   
   form {
-      display: flex;
+    display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
   }
   
-  .contents {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%)
-  }  
+
+  
+  textarea {
+    background-color: #DDDDDD;
+      border: none;
+      padding: 12px 15px;
+      margin: 8px 0;
+    width: 100%;
+    border-radius: 6px;
+  }
+  
+  img {
+    max-height: 100px;
+  }
+  
+  h3 {
+    color: #757575;
+    font-size: 0.8rem ;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0px 1000px #DDDDDD inset !important;
+  }

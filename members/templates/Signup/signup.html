@@ -1,0 +1,21 @@
+{% extends "../BaseHtml/base.html" %}
+{% load static %}
+{% block title %}
+IEvent|Fests
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="/static/signup.css">
+{% endblock head %}
+{% block body %}
+<div class="contents">
+    <form class="login" method='POST'>
+        {% csrf_token %}
+        <img src="/static/images/userreg/face2.png">
+        <input class="txt" type="text" placeholder="Username" name="username">
+        <input class="txt" type="text" placeholder="Email" name="email">
+        <input class="txt" type="password" placeholder="Password" name="password">
+        <button>Signup</button>
+        <h3 style="margin-top:10px">Already have an account?&nbsp<a href="/auth/login"><u>Login</u></a></h3>
+    </form>
+</div>
+{% endblock body%}

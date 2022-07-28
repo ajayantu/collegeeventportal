@@ -10,8 +10,24 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
-    margin: 0 2%;
+    padding: 12px 2%;
+    box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+}
+.left_content{
+    display: flex;
+    align-items: center;
+}
+.left_content img{
+    width: 30px;
+    margin-right: 8px;
+}
+.left_content h1 a{
+    font-size: 1.3rem;
 }
 .navbar-logo a{
     color: black;

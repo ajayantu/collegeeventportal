@@ -1,0 +1,22 @@
+{% extends "../BaseHtml/base.html" %}
+{% load static %}
+{% block title %}
+IEvent|Fests
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/events.css">
+{% endblock head %}
+{% block body %}
+<div class="events_main_container">
+    <img src="/media/{{fest_poster}}" alt="">
+    <div class="events_container">
+        {% for event in events %}
+        <div class="event_item">
+            <img src="/media/{{event.event_img}}" alt="">
+            {{event.event_name}}
+            <a href="/regevent/{{event.id}}"><button>Register</button></a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}

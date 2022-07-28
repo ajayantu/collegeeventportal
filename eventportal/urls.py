@@ -5,6 +5,8 @@ urlpatterns = [
     path('', views.welcome, name='welcome'),
     path('fests', views.fests, name='fests'),
     path('addfest', views.addfest, name='addfest'),
-    path('login', views.login, name='login'),
+    path('events/<uuid:id>', views.events, name='events'),
+    path('regevent/<uuid:id>', views.regevent, name='regevents'),
+    path('getregevent', views.getregevent, name='getregevents'),
 ]
 

@@ -1,91 +1,76 @@
+{% extends "../BaseHtml/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Event Portal</title>
-    <link rel="stylesheet" href="/static/css/index.css">
-</head>
-<body>
-    <div class="welcome_page_container">
-        <div class="welcome_hero_container">
-            <nav>
-                <h1 class="navbar-logo"><a href="#">iEvent</a></h1>
-                <ul class="nav_links">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Signup</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="welcome_desc">
-                <div class="platform_details">
-                    <div class="title">
-                        <span>College <br> Event Portal</span>
-                    </div>
-                    <div class="platform_description">
-                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi nemo, eum ipsa quo alias cum dolor rerum autem velit veritatis minus inventore aliquam molestias! Expedita dignissimos, officia cum ipsam dolorem eligendi eaque maxime? Deleniti dolores molestiae illo inventore.
-                        </span>
-                    </div>
-                    <div class="get_started_btn">
-                        <a href="/fests"><button>Get Started</button></a>
-                    </div>
+{% block title %}
+IEvent|add fest
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/index.css">
+{% endblock head %}
+{% block body %}
+<div class="welcome_page_container">
+    <div class="welcome_hero_container">
+        
+        <div class="welcome_desc">
+            <div class="platform_details">
+                <div class="title">
+                    <span>College <br> Event Portal</span>
                 </div>
-                <div class="welcome_img">
-                    <img src="/static/images/home_img2.png" alt="">
+                <div class="platform_description">
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi nemo, eum ipsa quo alias cum dolor rerum autem velit veritatis minus inventore aliquam molestias! Expedita dignissimos, officia cum ipsam dolorem eligendi eaque maxime? Deleniti dolores molestiae illo inventore.
+                    </span>
+                </div>
+                <div class="get_started_btn">
+                    <a href="/fests"><button>Get Started</button></a>
                 </div>
             </div>
-        </div>
-        <div class="features_container">
-            <h1 className="feature_title">Features</h1>
-            <div class="feature_cards">
-                <div class="feature_card_item">
-                    <h3>Event Registration</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
-                </div>
-                <div class="feature_card_item">
-                    <h3>Payment Integration</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
-                </div>
-                <div class="feature_card_item">
-                    <h3>Event Tracking</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
-                </div>
-                <div class="feature_card_item">
-                    <h3>Hosting Fests & Events</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
-                </div>
-                <div class="feature_card_item">
-                    <h3>Track Event Participation</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
-                </div>
-                <div class="feature_card_item">
-                    <h3>Get Email Schedules</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
-                </div>
-            </div>
-        </div>
-        <div class="about_container">
-            <div class="about_contents">
-                <img src="/static/images/aboutimg.png" alt="">
-                <div class="about_details">
-                    <h2>About our Platform</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum possimus alias quas dicta voluptates repudiandae unde iusto quaerat cumque quasi libero neque ducimus, officiis, incidunt maiores explicabo ut maxime ipsam quae laudantium accusamus consequuntur perspiciatis illum ad! Doloribus, possimus! Odio, minima neque. Placeat dolor voluptatibus sunt nesciunt laborum voluptas doloribus, vitae, tempora animi deserunt eaque cupiditate totam atque, laboriosam assumenda.</p>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <div class="footer_contents">
-                <p>Made with love by Ajay Antu</p>
+            <div class="welcome_img">
+                <img src="/static/images/home_img2.png" alt="">
             </div>
         </div>
     </div>
-</body>
-</html>
+    <div class="features_container">
+        <h1 className="feature_title">Features</h1>
+        <div class="feature_cards">
+            <div class="feature_card_item">
+                <h3>Event Registration</h3>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
+            </div>
+            <div class="feature_card_item">
+                <h3>Payment Integration</h3>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
+            </div>
+            <div class="feature_card_item">
+                <h3>Event Tracking</h3>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
+            </div>
+            <div class="feature_card_item">
+                <h3>Hosting Fests & Events</h3>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
+            </div>
+            <div class="feature_card_item">
+                <h3>Track Event Participation</h3>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
+            </div>
+            <div class="feature_card_item">
+                <h3>Get Email Schedules</h3>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio quam reprehenderit aliquid nobis magni saepe aperiam, distinctio quas excepturi iure.</p>
+            </div>
+        </div>
+    </div>
+    <div class="about_container">
+        <div class="about_contents">
+            <img src="/static/images/aboutimg.png" alt="">
+            <div class="about_details">
+                <h2>About our Platform</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum possimus alias quas dicta voluptates repudiandae unde iusto quaerat cumque quasi libero neque ducimus, officiis, incidunt maiores explicabo ut maxime ipsam quae laudantium accusamus consequuntur perspiciatis illum ad! Doloribus, possimus! Odio, minima neque. Placeat dolor voluptatibus sunt nesciunt laborum voluptas doloribus, vitae, tempora animi deserunt eaque cupiditate totam atque, laboriosam assumenda.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer_contents">
+            <p>Made with love by Ajay Antu</p>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+    

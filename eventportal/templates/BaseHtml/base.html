@@ -9,19 +9,36 @@
     <link rel="stylesheet" href="/static/css/base.css">
     {% block head %}{% endblock head %}
 </head>
-<body>
-    <nav>
-        <h1 class="navbar-logo"><a href="#">iEvent</a></h1>
+<body style="background-color:#f5f5f5">
+    <nav style="background-color:#fff">
+        <div class="left_content">
+            <img src="/static/images/logo1.png" alt="">
+            <h1 class="navbar-logo"><a href="/fests">iEvent</a></h1>
+        </div>
         <ul class="nav_links">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/auth/logout">Logout</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link active" aria-current="page" href="/getregevent">RegEvents</a>
             </li>
+            {% if user.profile.isCordinator %}
             <li class="nav-item">
-                <a class="nav-link" href="#">Signup</a>
+                <a class="nav-link" href="/cordinator">Coordinator Panel</a>
             </li>
+            {% endif %}
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/auth/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/auth/signup">Signup</a>
+                </li>
+            {% endif %}
         </ul>
         </div>
       </nav>

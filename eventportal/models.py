@@ -1,3 +1,4 @@
+from multiprocessing import Event
 from djongo import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -24,6 +25,10 @@ class Events(models.Model):
     event_tags = models.CharField(max_length=255,default="")
     event_desc = models.TextField(default="")
     event_fest = models.ForeignKey(Fests, on_delete=models.CASCADE)
+    event_price = models.IntegerField()
+    event_prizepool = models.IntegerField()
+    event_team_size = models.IntegerField()
+
 
     def __str__(self):
         return self.event_name+' | '+self.event_author.username
@@ -31,4 +36,14 @@ class Events(models.Model):
 class Registered(models.Model):
     event = models.ForeignKey(Events,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    razor_pay_order_id=models.CharField(max_length=100,null=True,blank=True)
+    razor_pay_payment_id=models.CharField(max_length=100,null=True,blank=True)
+    razor_pay_payment_signature=models.CharField(max_length=100,null=True,blank=True)
+
+class Payments(models.Model):
+    event=models.ForeignKey(Events,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    order_id=models.CharField(max_length=100,null=True,blank=True)
+    payment_id=models.CharField(max_length=100,null=True,blank=True)
+    status=models.BooleanField(default=False)
 

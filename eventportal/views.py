@@ -1,7 +1,12 @@
+from http import client
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .models import Events,Registered,Fests
+from .models import Events,Registered,Fests,Payments
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+import razorpay
+client = razorpay.Client(auth=(settings.KEY,settings.SECRET))
 # Create your views here.
 
 
@@ -30,25 +35,93 @@ def addfest(request):
         return redirect('/fests');
     return render(request,'CreateFest/createfest.html');
     
-
 def events(request,id):
     fest = Fests.objects.filter(pk=id).first()
     events = Events.objects.filter(event_fest=fest)
     print(fest.fest_img)
+    
     return render(request,"Events/events.html",context={'events':events,'fest_poster':fest.fest_img})
 
 @login_required(login_url='/auth/login')
-def regevent(request,id):
+def yourevents(request,id):
     event = Events.objects.filter(pk=id).first()
     reg = Registered(event=event,user=request.user)
     reg.save()
     return redirect('/fests')
 
-def getregevent(request):
-    reg = Registered.objects.all();
+def getyourevents(request):
+    reg = Registered.objects.filter(user=request.user);
     context={
         'reg':reg
     }
-    return render(request,'RegEvents/regevents.html',context)
+    print(reg[0].id)
+    return render(request,'yourevents/yourevents.html',context)
+
+def delregevents(request):
+    Registered.objects.delete()
+
+def regevent(request,id):
+    event = Events.objects.filter(pk=id).first();
+    print(event.id)
+    tags = event.event_tags.split(',')
+    context={
+        'event':event,
+        'tags':tags
+    }
+    return render(request,'registerpage/registerpage.html',context)
+
+def checkout(request,id):
+    payment=None
+    orderid=None
+    event = Events.objects.filter(pk=id).first();
+    amt=event.event_price
+    print(amt)
+    action = request.GET.get('action')
+
+    if action=="create_payment":
+        if request.method=="POST":
+            payment=client.order.create(data={'amount':amt*100,'currency':'INR','payment_capture':1})
+            orderid = payment.get('id')
+            pay = Payments(user=request.user,event=event,order_id=payment.get('id'))
+            pay.save()
+
+    context={
+        'event':event,
+        'payment':payment,
+        'orderid':orderid
+    }
+    return render(request,'checkout/checkout.html',context)
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def verify_payment(request):
+    # event = Events.objects.filter(pk=id).first();
+    if request.method=="POST":
+        data=request.POST
+        try:
+            razor_pay_order_id = data['razorpay_order_id']
+            razor_pay_payment_id = data['razorpay_payment_id']
+            payment = Payments.objects.get(order_id=razor_pay_order_id)
+            payment.payment_id = razor_pay_payment_id
+            payment.status=True
+            payment.save()
+
+            print(razor_pay_order_id,"    ",razor_pay_payment_id)
+            Registered.objects.create(user=payment.user,event=payment.event)
+            return render(request,'paymentstatus/success.html')
+        except:
+            return render(request,'paymentstatus/fail.html')
+    return redirect("/")
+
+
 def cordinator(request):
-    pass
+    events=Events.objects.filter(event_author=request.user)
+    fests=Fests.objects.filter(fest_author=request.user)
+    reg=Registered.objects.filter(event__event_author=request.user)
+    count_fest = len(fests)
+    count_events = len(events)
+    count_reg = len(reg)
+
+    
+    context={ 'events':events, 'fests':fests, 'regis':reg,'count_fest':count_fest,'count_event':count_events,'count_reg':count_reg}
+    return render(request,'cordinator/coordinator.html',context)

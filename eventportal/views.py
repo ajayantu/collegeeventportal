@@ -1,4 +1,5 @@
 from http import client
+import datetime
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .models import Events,Registered,Fests,Payments
@@ -16,7 +17,8 @@ def welcome(request):
 @login_required(login_url='/auth/login')
 def fests(request):
     desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sapien finibus sapien nec ornare. Sed venenatis pulvinar enim at porttitor. Proin lectus justo, condimentum id ipsum ac, elementum laoreet elit. Nam odio dui, euismod ut lacinia ac, luctus vel dolor. Nulla facilisi. Nunc feugiat congue nisl, sed ultricies nibh varius non. Integer dapibus ultrices interdum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sapien finibus sapien nec ornare. Sed venenatis."
-    fests = Fests.objects.all()
+    today_date = datetime.datetime.now()
+    fests = Fests.objects.filter(fest_date__gte=today_date)
     context = {'fests':fests,'festdesc':desc}
     return render(request,'homepage/fests.html',context);
 
@@ -28,8 +30,9 @@ def addfest(request):
             fest_img = request.FILES.get('festimg')
             venue = request.POST.get('festvenue')
             desc = request.POST.get('festdesc')
+            fdate = request.POST.get('festdate')
             if(fest_name and fest_img and venue):
-                Fests.objects.create(fest_name=fest_name,fest_venue=venue,fest_img=fest_img,fest_desc=desc,fest_author=request.user)
+                Fests.objects.create(fest_name=fest_name,fest_venue=venue,fest_img=fest_img,fest_desc=desc,fest_author=request.user,fest_date=fdate)
             return redirect('/fests')
     else:
         return redirect('/fests');
@@ -42,23 +45,16 @@ def events(request,id):
     
     return render(request,"Events/events.html",context={'events':events,'fest_poster':fest.fest_img})
 
-@login_required(login_url='/auth/login')
-def yourevents(request,id):
-    event = Events.objects.filter(pk=id).first()
-    reg = Registered(event=event,user=request.user)
-    reg.save()
-    return redirect('/fests')
-
 def getyourevents(request):
     reg = Registered.objects.filter(user=request.user);
     context={
         'reg':reg
     }
-    print(reg[0].id)
     return render(request,'yourevents/yourevents.html',context)
 
-def delregevents(request):
-    Registered.objects.delete()
+def unregister(request,id):
+    Registered.objects.filter(id=id).delete()
+    return redirect('fests')
 
 def regevent(request,id):
     event = Events.objects.filter(pk=id).first();
@@ -75,7 +71,6 @@ def checkout(request,id):
     orderid=None
     event = Events.objects.filter(pk=id).first();
     amt=event.event_price
-    print(amt)
     action = request.GET.get('action')
 
     if action=="create_payment":
@@ -113,15 +108,48 @@ def verify_payment(request):
             return render(request,'paymentstatus/fail.html')
     return redirect("/")
 
+def eventcreate(request,id):
+    if request.method=="POST":
+        event_name = request.POST.get('evname')
+        event_author = request.user
+        event_img = request.FILES.get('evimg')
+        event_tags = request.POST.get('evtag')
+        event_desc = request.POST.get('evdesc')
+        event_fest = Fests.objects.filter(pk=id).first()
+        event_price = request.POST.get('evprice')
+        event_prizepool = request.POST.get('evpool')
+        event_team_size = request.POST.get('evteam')
+        eve=Events(event_name=event_name,event_author=event_author,event_img=event_img,event_tags=event_tags,event_fest=event_fest,event_price=event_price,event_prizepool=event_prizepool,event_team_size=event_team_size,event_desc=event_desc)
+        eve.save()
+        return redirect("/cordinator")
+    return render(request,'createevent/createevent.html')
 
+
+
+
+def eventdelete(request,id):
+    event = Events.objects.filter(id=id).delete()
+    return redirect("/cordinator")
+
+def festdelete(request,id):
+    event = Fests.objects.filter(id=id).delete()
+    return redirect("/cordinator")
+
+
+
+from django.db.models import Count
 def cordinator(request):
-    events=Events.objects.filter(event_author=request.user)
+    events = Events.objects.annotate(num_participants=Count('registered')).filter(event_author=request.user)
     fests=Fests.objects.filter(fest_author=request.user)
     reg=Registered.objects.filter(event__event_author=request.user)
     count_fest = len(fests)
     count_events = len(events)
     count_reg = len(reg)
-
+    action = request.GET.get('action')
+    if action=="filter_events":
+        if request.method=="POST":
+            idd = request.POST['event']
+            reg = Registered.objects.filter(event__event_author=request.user,event__id=idd)
     
     context={ 'events':events, 'fests':fests, 'regis':reg,'count_fest':count_fest,'count_event':count_events,'count_reg':count_reg}
     return render(request,'cordinator/coordinator.html',context)

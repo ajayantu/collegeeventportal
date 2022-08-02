@@ -16,6 +16,11 @@ IEvent|Fests
         <input class="txt" type="password" placeholder="Password" name="password">
         <button>Signup</button>
         <h3 style="margin-top:10px">Already have an account?&nbsp<a href="/auth/login"><u>Login</u></a></h3>
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert" style="margin-bottom: 0px;">
+                {{message}}
+            </div>
+        {% endfor %}
     </form>
 </div>
 {% endblock body%}

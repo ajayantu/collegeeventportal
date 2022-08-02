@@ -94,7 +94,7 @@ tr:hover td{
 }
 .add_fest_btn{
   display: block;
-    padding:8px 25px;
+    /*padding:8px 25px;*/
     font-size: 1rem;
     text-align: center;
     color: #ffffff;
@@ -103,7 +103,13 @@ tr:hover td{
     border-radius: 0.4rem;
     transition: 0.2s;
     cursor: pointer;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 
-  
+.sorting_participant{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 10px;
+}

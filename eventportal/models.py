@@ -13,6 +13,7 @@ class Fests(models.Model):
     fest_venue = models.CharField(max_length=255)
     fest_img = models.ImageField(null=True,blank=True,upload_to="images/")
     fest_desc = models.TextField()
+    fest_date = models.DateField()
     def __str__(self):
         return self.fest_name+' | '+self.fest_author.username
 
@@ -29,11 +30,11 @@ class Events(models.Model):
     event_prizepool = models.IntegerField()
     event_team_size = models.IntegerField()
 
-
     def __str__(self):
         return self.event_name+' | '+self.event_author.username
     
 class Registered(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     event = models.ForeignKey(Events,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     razor_pay_order_id=models.CharField(max_length=100,null=True,blank=True)

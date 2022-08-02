@@ -47,25 +47,20 @@
         <div id="events" class="w3-container city" >
           <br><br>
       <div <div style="overflow-x:auto;">
+  
       <table class="tbl" align="center">
         <tr>
           <th>Event Name</th>
-          <th>Date</th>
-          <th>Mode</th>
           <th>Price</th>
           <th>Participation</th>
           <th>Delete</th>
-          <th>Edit</th>
         </tr>
         {% for event in events %}
         <tr>
           <td>{{event.event_name}}</td>
-          <td>12/08/2023</td>
-          <td>Online</td>
           <td>{{event.event_price}}</td>
-          <td>20</td>
-          <td><a href="#"><img src="/static/images/delete 1.png" height="20px"></a></td>
-          <td><a href="#"><img src="/static/images/editing 1.png" height="20px"></a></td>
+          <td>{{event.num_participants}}</td>
+          <td><a href="/eventdelete/{{event.id}}"><img src="/static/images/delete 1.png" height="20px"></a></td>
         </tr>
         {% endfor %}
       </table>
@@ -76,23 +71,20 @@
           <br><br>
       <div <div style="overflow-x:auto;">
       <table class="tbl" align="center">
-        <a href="/addfest"><button class="add_fest_btn">Add fests</button></a>
+        <a href="/addfest"><button class="add_fest_btn" style="margin-bottom:20px">Add fests</button></a>
         <tr>
           <th>Fest Name</th>
           <th>Date</th>
-          <th>Mode</th>
-          <th>Participation</th>
+          <th>Venue</th>
           <th>Delete</th>
-          <th>Edit</th>
         </tr>
         {% for fest in fests %}
         <tr>
           <td>{{fest.fest_name}}</td>
-          <td>12/08/2023</td>
-          <td>Online</td>
-          <td>20</td>
-          <td><a href="#"><img src="/static/images/delete 1.png" height="20px"></a></td>
-          <td><a href="#"><img src="/static/images/editing 1.png" height="20px"></a></td>
+          <td>{{fest.fest_date}}</td>
+          <td>{{fest.fest_venue}}</td>
+          <td><a href="/festdelete/{{fest.id}}"><img src="/static/images/delete 1.png" height="20px"></a></td>
+          <td><a href="/eventcreate/{{fest.id}}"><button class="add_fest_btn">Create Event</button></a></td>
         </tr>
         {% endfor %}
       </table>
@@ -102,6 +94,17 @@
       
         <div id="participants" class="w3-container city" style="display:none">
           <br><br>
+      <div class="sorting_participant">
+        <form action="?action=filter_events" method="POST">
+          {% csrf_token %}
+          <select id="events" name="event">
+            {% for event in events %}
+              <option value={{event.id}}>{{event.event_name}}</option>
+            {% endfor %}
+          </select>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
       <div <div style="overflow-x:auto;">
       <table class="tbl" align="center">
         <tr>
@@ -111,7 +114,6 @@
           <th>Class</th>
           <th>Event Name</th>
           <th>Delete</th>
-          <th>Edit</th>
         </tr>
         {% for reg in regis %}
         <tr>
@@ -121,7 +123,6 @@
           <td>S6 CSA</td>
           <td>{{reg.event.event_name}}</td>
           <td><a href="#"><img src="/static/images/delete 1.png" height="20px"></a></td>
-          <td><a href="#"><img src="/static/images/editing 1.png" height="20px"></a></td>
         </tr>
         {% endfor %}
       </table>

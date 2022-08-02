@@ -19,14 +19,12 @@
 }
   
   .grid {
-    margin-left: auto;
-    margin-right: auto;
-    /* width: 114rem; */
     grid-gap: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
   }
   @media (max-width: 50em) {
     .grid {
@@ -41,8 +39,8 @@
     cursor: pointer;
     transition: 0.2s;
     margin-bottom: 5rem;
+    width: 100%;
     max-width: 300px;
-
   }
   .grid__item:hover {
     transform: translateY(-0.5%);
@@ -56,13 +54,16 @@
     object-fit: cover;
   }
   .card__content {
-    padding: 3rem 3rem;
+    padding: 10px 10px 10px 10px;
   }
   .card__header {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: #0d0d0d;
     margin-bottom: 1.5rem;
+  }
+  .event_price{
+    font-size: 1.55rem;
   }
   .card__text {
     font-size: 1.5rem;

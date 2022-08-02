@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'eventportal.apps.EventportalConfig',
     'members.apps.MembersConfig',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,7 +76,7 @@ WSGI_APPLICATION = 'eventhub.wsgi.application'
 DATABASES = {
     'default':{
         'ENGINE':'djongo',
-        'NAME':'eventcollege',
+        'NAME':'mydatabase',
         "CLIENT":{
             'host':'mongodb+srv://ash:s215RaLU@cluster0.kzqn6.mongodb.net/?retryWrites=true&w=majority',
             'username':'ash',
@@ -134,3 +135,5 @@ MEDIA_URL = '/media/'
 
 KEY="rzp_test_Eb2FJaO7glZisz"
 SECRET="OJ1GkyjQcPf5Xz3KA7IOLivL"
+
+DATE_INPUT_FORMATS = ['%d-%m-%Y']

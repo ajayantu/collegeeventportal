@@ -34,10 +34,18 @@ def user_signup(request):
         password = request.POST['password']
         hashed_password = make_password(password)
         email = request.POST['email']
-        user = User(username=username,password=hashed_password,email=email)
-        user.save()
-        Profile.objects.create(user=user)
-        user = authenticate(request, username=username, password=password)
-        login(request,user);
-        return redirect('/fests')
+        try:
+            if User.objects.filter(email=email).exists():
+                messages.success(request, ('Already have an account with same email id'))
+                return redirect('/auth/signup')
+            else:
+                user = User(username=username,password=hashed_password,email=email)
+                user.save()
+                Profile.objects.create(user=user)
+                user = authenticate(request, username=username, password=password)
+                login(request,user);
+                return redirect('/fests')
+        except :
+            messages.success(request, ('Already have an account with same email id'))
+            return redirect('/auth/signup')
     return render(request,'Signup/signup.html')

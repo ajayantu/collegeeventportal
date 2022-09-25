@@ -19,12 +19,13 @@ IEvent|Fests
                     <h3>&nbsp;{{fest.fest_date}}</h3><br>
                     <h1 class="card__header">{{ fest.fest_name }}</h1>
                     <h3>&nbsp;{{ fest.fest_venue }}</h3><br>
-                    <p class="card__text">{{festdesc}}</p>
+                    <p class="card__text">{{fest.fest_desc}}</p>
                     <a href="events/{{fest.id}}" style="text-decoration:none"><button class="card__btn">View Events</button></a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+    <p class="footer-text">© 2022 IEvent. All rights reserved</p>
 </div>
 {% endblock body %}

@@ -15,5 +15,7 @@ urlpatterns = [
     path('eventcreate/<uuid:id>', views.eventcreate, name='eventcreate'),
     path('festdelete/<uuid:id>', views.festdelete, name='festdelete'),
     path('eventdelete/<uuid:id>', views.eventdelete, name='eventdelete'),
+    path('profile', views.profile, name='profile'),
+    path('editprofile', views.editprofile, name='editprofile'),
 ]
 

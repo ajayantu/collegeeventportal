@@ -20,7 +20,7 @@ IEvent|Registered Events
         </div>
         <div class="box2">
             Total
-            <h2 class="price">$ {{event.event_price}}</h2>
+            <h2 class="price">₹ {{event.event_price}}</h2>
             Quantity 1<br><br>
             <form action="?action=create_payment" method="POST">
                 {% csrf_token %}

@@ -2,8 +2,12 @@
     display: flex;
     justify-content: space-evenly;
 }
-  
-  
+.cordinator_container{
+  padding-top: 30px;
+}
+  body{
+    line-height: 0;
+  }
   .column {
     width: 25%;
     padding: 0 auto;
@@ -28,7 +32,7 @@
   
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
-    padding: .1em;
+    padding: 1em;
     text-align: center;
     background-color: #FFF8F8;
   }
@@ -94,7 +98,7 @@ tr:hover td{
 }
 .add_fest_btn{
   display: block;
-    /*padding:8px 25px;*/
+    padding:6px 10px;
     font-size: 1rem;
     text-align: center;
     color: #ffffff;
@@ -103,7 +107,7 @@ tr:hover td{
     border-radius: 0.4rem;
     transition: 0.2s;
     cursor: pointer;
-    /*margin-bottom: 30px;*/
+    margin-bottom: 30px;
 }
 
 .sorting_participant{

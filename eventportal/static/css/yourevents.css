@@ -1,5 +1,5 @@
 .regevents_main_container{
-    margin-top: 50px;
+  padding-top: 50px;
 }
 .regevents_main_container h1{
     font-size: 1.5rem;
@@ -60,7 +60,7 @@
   @media(max-width:950px){
     .regevents_container{
         flex-direction: column;
-        padding: 30px;
+        padding:0 30px;
     }
     .card{
         width: 100%;

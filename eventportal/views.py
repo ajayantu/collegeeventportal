@@ -70,9 +70,7 @@ def regevent(request,id):
 def checkout(request,id):
 
     eve=Events.objects.get(pk=id)
-    print(eve)
     userfest=Registered.objects.filter(user=request.user,event=eve)
-    print(userfest)
     if len(userfest)!=0:
         messages.success(request,("Already registered for the event.."))
         return redirect('/fests')
@@ -85,6 +83,10 @@ def checkout(request,id):
 
     if action=="create_payment":
         if request.method=="POST":
+            if(eve.event_price==0):
+                Registered.objects.create(user=request.user,event=eve)
+                messages.success(request,("Event registered successfully.."))
+                return redirect('/fests')
             payment=client.order.create(data={'amount':amt*100,'currency':'INR','payment_capture':1})
             orderid = payment.get('id')
             pay = Payments(user=request.user,event=event,order_id=payment.get('id'))
@@ -113,6 +115,7 @@ def verify_payment(request):
 
             print(razor_pay_order_id,"    ",razor_pay_payment_id)
             Registered.objects.create(user=payment.user,event=payment.event)
+            messages.success(request,("Event registered successfully.."))
             return render(request,'paymentstatus/success.html')
         except:
             return render(request,'paymentstatus/fail.html')

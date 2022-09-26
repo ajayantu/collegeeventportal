@@ -18,7 +18,12 @@ IEvent|Fests
           <div class="event_contents">
             <div class="event_name">{{event.event_name}}</div>
             <div class="event_desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, culpa.</div>
-            <div class="event_price">₹ {{event.event_price}}</div>
+            <div class="event_price">
+              {% if event.event_price == 0 %}
+              Free
+              {% else %}
+              ₹ {{event.event_price}}</div>
+              {% endif %}
             <div class="reg_button">
               <a href="/regevent/{{event.id}}" style="text-decoration:none"><button>Details &nbsp; <i class="fas fa-arrow-right"></i></button></a>
             </div>

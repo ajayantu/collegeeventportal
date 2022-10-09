@@ -38,14 +38,10 @@ create a virtual environment and activate it
   activate
 ```
 
-install following libraries after activating environment
+install all libraries in requirements.txt after activating environment using the command
 
 ```bash
-  pip install django
-  pip install djongo
-  pip install pillow
-  pip install dnspython
-  pip install pytz
+  pip install -r requirements.txt
 ```
 
 go to project folder run server

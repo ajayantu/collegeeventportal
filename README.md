@@ -44,7 +44,7 @@ install all libraries in requirements.txt after activating environment using the
   pip install -r requirements.txt
 ```
 
-go to project folder run server
+go to project folder runserver
 ```bash
   python manage.py run server
 ```

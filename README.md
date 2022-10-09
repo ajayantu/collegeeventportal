@@ -53,5 +53,8 @@ go to project folder run server
   python manage.py run server
 ```
 
-
-    
+## Screenshots
+![1](https://user-images.githubusercontent.com/73870072/194759125-412cefd8-13fc-4cad-8750-958e20ba3ee7.PNG)
+![2](https://user-images.githubusercontent.com/73870072/194759140-02bf0508-de8e-4c8b-90eb-211e6c25da17.PNG)
+![3](https://user-images.githubusercontent.com/73870072/194759150-d951dc08-fd6c-4c45-8ffc-24d6d795fc2f.PNG)
+![4](https://user-images.githubusercontent.com/73870072/194759167-52f68cf5-33d3-40c1-b9f9-bd8f699c1c5b.PNG)
